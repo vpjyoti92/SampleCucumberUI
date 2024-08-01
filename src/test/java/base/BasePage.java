@@ -3,9 +3,12 @@ package base;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import cucumber.api.java.eo.Se;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.openqa.selenium.*;
@@ -15,6 +18,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertTrue;
@@ -398,10 +402,9 @@ public class BasePage {
     }
 
     /**
-     * Method is to validate id element is enabled
+     * Method is to get cart size
      *
      * @return
-     * @param addToCart
      */
     public String validateCartSize() {
         WebElement addToCart1 = new Elements(driver).ShoppingCart;
@@ -413,6 +416,50 @@ public class BasePage {
      */
     public WebDriver getDriver() {
         return driver;
+    }
+
+    /**
+     * Method for selecting filter Details
+     */
+    public void selectElementByText(String text) {
+        WebElement element = new Elements(driver).ProductSort;
+        Select select = new Select(element);
+
+        switch (text) {
+            case "lowToHigh":
+            select.selectByVisibleText("Price (low to high)");
+            break;
+            case "highToLow":
+                select.selectByVisibleText("Price (high to low)");
+                break;
+            case "AToZ":
+                select.selectByVisibleText("Name (A to Z)");
+                break;
+            case "ZToA":
+                select.selectByVisibleText("Name (Z to A)");
+                break;
+
+            default:
+                System.out.println("Invalid filter type is selected");
+        }
+    }
+
+    public boolean validateProductsDisplayedInOrder(String order)
+    {
+        List<Integer> list=new ArrayList<>();
+        if(order == "asc")
+        {
+           List<WebElement> elements= new Elements(driver).ProductsPrice;
+         for(int i=0; i<elements.size(); i++)
+         {
+            list.add(Integer.parseInt(elements.get(i).getText()));
+         }
+        }
+           if(list.iterator().hasNext())
+           {
+               System.out.println(list.iterator().next());
+           }
+        return true;
     }
 }
 

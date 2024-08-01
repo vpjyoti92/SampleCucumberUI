@@ -91,6 +91,15 @@ Feature: Validating today deal on home page
     Then I switch to LinkedIn tab and close it
 
 
+    @Test3
+    Scenario: Multiple scenarios Workflow
+      Given Launch Google using Chrome browser and https://www.saucedemo.com/ url
+      Then Input standard_user on Username inputbox
+      Then Input secret_sauce on Password inputbox
+      Then Click on LoginButton link
+      Then I filter by lowToHigh
+      Then I validate products displayed are sorted in asc
+
 
 
 

@@ -17,15 +17,6 @@ public class ValidationSteps {
 
 	BasePage base = new BasePage();
 
-	/**
-	 * 
-	 * @param browsertype
-	 *            type of browser
-	 * @param url
-	 * @throws MalformedURLException
-	 * @throws InterruptedException
-//	 */
-
 
 	@Then("^Click on (.*) link$")
 	public void clickLink(String link) {
@@ -60,14 +51,6 @@ public class ValidationSteps {
 		base.WaitForTime(waitTime);
 	}
 
-	/**
-	 *
-	 * @param browsertype
-	 *            type of browser
-	 * @param url
-	 * @throws MalformedURLException
-	 * @throws InterruptedException
-	 */
 	@Given("^Launch Google using (.*) browser and (.*) url$")
 	public void launch_Google(String browsertype, String url)
 			throws MalformedURLException, InterruptedException {
@@ -122,5 +105,20 @@ public class ValidationSteps {
 	@Then("^I switch to LinkedIn tab and close it$")
 	public void iSwitchToLinkedInTabAndCloseIt() {
 		base.SwitchLinkedInTabandClose();
+	}
+
+	@Then("^I filter by (.*)$")
+	public void iFilterByLowToHigh(String abc) {
+		base.selectElementByText(abc);
+	}
+
+	@Then("^I validate (.*) is selected$")
+	public void iValidateLowToHighfilterIsSelected(String str) {
+		base.selectElementByText(str);
+	}
+
+	@Then("^I validate products displayed are sorted in (.*)$")
+	public void iValidateProductsDisplayedAreSortedInLowToHigh(String order) {
+		base.validateProductsDisplayedInOrder(order);
 	}
 }
